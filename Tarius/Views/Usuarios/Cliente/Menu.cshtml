@@ -2,22 +2,28 @@
     ViewData["Title"] = "Menú Cliente";
 }
 
-<h2>Bienvenido al Menú del Cliente</h2>
+<div class="container py-5">
+    <h2 class="text-center mb-4">Bienvenido al Menú del Cliente</h2>
 
-<div style="display: flex; flex-direction: column; gap: 15px; margin-top: 30px;">
-    <form asp-action="MisIngredientes" method="post">
-        <button type="submit" class="btn btn-primary btn-block">Mis Ingredientes</button>
-    </form>
+    <div class="row justify-content-center">
+        <div class="col-12 col-sm-8 col-md-6 d-grid gap-3">
 
-    <form asp-action="ListaCompras" asp-controller="RecetasCliente" method="post">
-        <button type="submit" class="btn btn-secondary  btn-block">Lista de Compras</button>
-    </form>
+            <form asp-action="MisIngredientes" method="post">
+                <button type="submit" class="btn btn-primary btn-lg w-100">Mis Ingredientes</button>
+            </form>
 
-    <form asp-action="Recetas" method="post">
-        <button type="submit" class="btn btn-success  btn-block">Recetas</button>
-    </form>
+            <form asp-action="ListaCompras" asp-controller="RecetasCliente" method="post">
+                <button type="submit" class="btn btn-secondary btn-lg w-100">Lista de Compras</button>
+            </form>
 
-    <form asp-action="Planes" method="post">
-        <button type="submit" class="btn btn-warning btn-block">Planes</button>
-    </form>
+            <form asp-action="Recetas" method="post">
+                <button type="submit" class="btn btn-success btn-lg w-100">Recetas</button>
+            </form>
+
+            <form asp-action="Planes" method="post">
+                <button type="submit" class="btn btn-warning btn-lg w-100">Planes</button>
+            </form>
+
+        </div>
+    </div>
 </div>

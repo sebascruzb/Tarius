@@ -2,9 +2,13 @@
     ViewData["Title"] = "Panel de Colaborador";
 }
 
-<h2>Panel del Colaborador</h2>
+<div class="container py-5">
+    <h2 class="text-center mb-4">Panel del Colaborador</h2>
 
-<div class="d-flex gap-3">
-    <a class="btn btn-primary btn-lg" asp-action="ListaRecetas">Recetas</a>
-    <a class="btn btn-secondary btn-lg" asp-action="Planes">Planes</a>
+    <div class="row justify-content-center">
+        <div class="col-12 col-sm-6 col-md-4 d-grid gap-3">
+            <a class="btn btn-primary btn-lg" asp-action="ListaRecetas">Recetas</a>
+            <a class="btn btn-secondary btn-lg" asp-action="Planes">Planes</a>
+        </div>
+    </div>
 </div>

@@ -1,57 +1,51 @@
 ﻿@model Tarius.Models.Usuarios
 
-<div class="login-container">
-    <div class="login-card">
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card shadow p-4" style="max-width: 450px; width: 100%;">
+
         <!-- Logo -->
-        <div class="login-logo">
-            <img src="~/resources/images/Logo.jpg" alt="Logo" />
+        <div class="text-center mb-3">
+            <img src="~/resources/images/Logo.jpg" alt="Logo" class="img-fluid rounded-circle" style="max-width: 100px;">
         </div>
 
         <!-- Título -->
-        <h2>Registrarse</h2>
+        <h3 class="text-center mb-4">Registrarse</h3>
 
-
-        <!-- Verificacion de campos  -->
+        <!-- Verificación de errores -->
         @if (ViewBag.Message != null)
+
         {
-            <div class="alert alert-danger">@ViewBag.Message</div>
+            <div class="alert alert-danger text-center">@ViewBag.Message</div>
         }
 
-        <!-- Formulario de Login -->
+        <!-- Formulario -->
+        <form asp-action="SingIn" asp-controller="SingIn" method="post">
 
-        <form asp-action="SingIn" asp-controller="SingIn" method="post" class="login-form">
-
-            <!-- Campo de Usuario -->
-            <div class="input-group">
-                <span class="icon">
-                    <i class="fas fa-user"></i>
-                </span>
-                <input asp-for="Nombre" placeholder="Usuario" class="form-input" />
-                <span asp-validation-for="Nombre" class="text-danger"></span>
+            <!-- Nombre de Usuario -->
+            <div class="mb-3">
+                <label asp-for="Nombre" class="form-label">Nombre de Usuario</label>
+                <input asp-for="Nombre" class="form-control" placeholder="Ingresa tu nombre" />
+                <span asp-validation-for="Nombre" class="text-danger small"></span>
             </div>
 
-
-            <!-- Campo de Correo -->
-            <div class="input-group">
-                <span class="icon">
-                    <i class="fas fa-user"></i>
-                </span>
-                <input asp-for="Correo" placeholder="Correo Electronico" class="form-input" />
-                <span asp-validation-for="Correo" class="text-danger"></span>
+            <!-- Correo Electrónico -->
+            <div class="mb-3">
+                <label asp-for="Correo" class="form-label">Correo Electrónico</label>
+                <input asp-for="Correo" class="form-control" placeholder="Ingresa tu correo electrónico" />
+                <span asp-validation-for="Correo" class="text-danger small"></span>
             </div>
 
-            <!-- Campo de Contraseña -->
-            <div class="input-group">
-                <span class="icon">
-                    <i class="fas fa-lock"></i>
-                </span>
-                <input asp-for="Contraseña" type="password" placeholder="Contraseña" class="form-input" />
-                <span asp-validation-for="Contraseña" class="text-danger"></span>
+            <!-- Contraseña -->
+            <div class="mb-4">
+                <label asp-for="Contraseña" class="form-label">Contraseña</label>
+                <input asp-for="Contraseña" type="password" class="form-control" placeholder="Crea una contraseña" />
+                <span asp-validation-for="Contraseña" class="text-danger small"></span>
             </div>
 
-            <!-- Botón de Login -->
-            <button type="submit" class="btn-login">Registrarse</button>
-
+            <!-- Botón de Registro -->
+            <div class="d-grid">
+                <button type="submit" class="btn btn-success">Registrarse</button>
+            </div>
         </form>
     </div>
 </div>

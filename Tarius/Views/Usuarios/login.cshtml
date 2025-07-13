@@ -1,50 +1,48 @@
 @model Tarius.Models.Usuarios
 
-<div class="login-container">
-    <div class="login-card">
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card shadow p-4" style="max-width: 400px; width: 100%;">
+
         <!-- Logo -->
-        <div class="login-logo">
-            <img src="~/resources/images/Logo.jpg" alt="Logo" />
+        <div class="text-center mb-3">
+            <img src="~/resources/images/Logo.jpg" alt="Logo" class="img-fluid rounded-circle" style="max-width: 100px;">
         </div>
 
         <!-- Título -->
-        <h2>Iniciar Sesion</h2>
+        <h3 class="text-center mb-4">Iniciar Sesión</h3>
 
-
-        <!-- Verificacion de campos  -->
+        <!-- Verificación de campos -->
         @if (ViewBag.Message != null)
+
         {
-            <div class="alert alert-danger">@ViewBag.Message</div>
+            <div class="alert alert-danger text-center">@ViewBag.Message</div>
         }
 
         <!-- Formulario de Login -->
-        <form asp-action="Login" asp-controller="Login" method="post" class="login-form">
-        
-            
-            <!-- Campo de Correo -->
-            <div class="input-group">
-                <span class="icon">
-                    <i class="fas fa-user"></i>
-                </span>
-                <input asp-for="Correo" placeholder="Correo Electronico" class="form-input" />
-                <span asp-validation-for="Correo" class="text-danger"></span>
+        <form asp-action="Login" asp-controller="Login" method="post">
+
+            <!-- Correo -->
+            <div class="mb-3">
+                <label asp-for="Correo" class="form-label">Correo Electrónico</label>
+                <input asp-for="Correo" class="form-control" placeholder="Ingresa tu correo" />
+                <span asp-validation-for="Correo" class="text-danger small"></span>
             </div>
 
-            <!-- Campo de Contraseña -->
-            <div class="input-group">
-                <span class="icon">
-                    <i class="fas fa-lock"></i>
-                </span>
-                <input asp-for="Contraseña" type="password" placeholder="Contraseña" class="form-input" />
-                <span asp-validation-for="Contraseña" class="text-danger"></span>
+            <!-- Contraseña -->
+            <div class="mb-3">
+                <label asp-for="Contraseña" class="form-label">Contraseña</label>
+                <input asp-for="Contraseña" type="password" class="form-control" placeholder="Ingresa tu contraseña" />
+                <span asp-validation-for="Contraseña" class="text-danger small"></span>
             </div>
 
-            <!-- Botón de Login -->
-            <button type="submit" class="btn-login">Iniciar Sesion</button>
-         
-            <!-- Enlace de Recuperación -->
-            <div class="forgot-password">
-                <a href="#">Olvidaste la Conrtaseña?</a>
+            <!-- Botón de login -->
+            <div class="d-grid mb-3">
+                <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+            </div>
+
+            <!-- Enlace de recuperación -->
+            <div class="text-center">
+                <a href="#">¿Olvidaste tu contraseña?</a>
             </div>
         </form>
     </div>
