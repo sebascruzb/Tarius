@@ -1,0 +1,31 @@
+﻿@model Tarius.Models.Colaborador.Receta
+
+@{
+    ViewData["Title"] = "Detalle de la Receta";
+}
+
+<h2>@Model.Nombre</h2>
+
+<p><strong>Descripción:</strong> @Model.Descripcion</p>
+<p><strong>Tiempo de Preparación:</strong> @Model.TiempoPreparacion minutos</p>
+<p><strong>Tipo:</strong> @Model.Tipo</p>
+<p><strong>Calorías:</strong> @Model.Calorias</p>
+
+<h4>Ingredientes</h4>
+<ul>
+    @foreach (var ingrediente in Model.Ingredientes)
+    {
+        var unidad = string.IsNullOrWhiteSpace(ingrediente.Unidad) ? "" : $" {ingrediente.Unidad}";
+        <li>@ingrediente.Nombre - @ingrediente.Cantidad@unidad</li>
+    }
+</ul>
+
+<h4>Pasos</h4>
+<ol>
+    @foreach (var paso in Model.Pasos.OrderBy(p => p.Orden))
+    {
+        <li>@paso.Descripcion</li>
+    }
+</ol>
+
+<a asp-controller="DashboardColaborador" asp-action="ListaRecetas" class="btn btn-secondary">Volver a la lista</a>

@@ -1,0 +1,99 @@
+// Variables
+$primary-color: #006666;
+$text-color: #555;
+$background-color: #f9f9f9;
+$border-color: #ddd;
+$button-color: #006666;
+$button-hover: #008080;
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin-top: -30px;
+}
+
+.login-card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 330px;
+
+    .login-logo {
+        margin-bottom: 5px;
+
+        img {
+            width: 100px;
+            height: auto;
+        }
+    }
+
+    h2 {
+        margin-bottom: 5px;
+        font-size: 1.8rem;
+        color: $primary-color;
+    }
+
+    .login-form { 
+        .input-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+            border-bottom: 1px solid $border-color;
+
+            .icon {
+                padding: 10px;
+                font-size: 1.2rem;
+                color: $text-color;
+            }
+
+            .form-input {
+                width: 100%;
+                padding: 10px;
+                border: none;
+                outline: none;
+                font-size: 1rem;
+                background-color: transparent;
+
+                &:focus {
+                    outline: none;
+                    border-bottom: 1px solid $primary-color;
+                }
+            }
+        }
+
+        .btn-login {
+            background-color: $button-color;
+            color: #fff;
+            border: 1px solid $button-color;
+            padding: 10px;
+            width: 100%;
+            margin-top: 5px;
+            border-radius: 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+
+            &:hover {
+                background-color: $button-hover;
+            }
+        }
+
+        .forgot-password {
+            margin-top: 5px;
+
+            a {
+                color: $text-color;
+                text-decoration: none;
+                font-size: 0.9rem;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}

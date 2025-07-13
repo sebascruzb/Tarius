@@ -1,0 +1,37 @@
+﻿ @model IEnumerable<Tarius.Models.Colaborador.Receta>
+
+@{
+    ViewData["Title"] = "Recetas";
+}
+
+<h2 class="text-2xl font-bold mb-4">Recetas Disponibles</h2>
+
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Tiempo (min)</th>
+            <th>Calorías</th>
+            <th>Tipo</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var receta in Model)
+        {
+            <tr>
+                <td>@receta.Nombre</td>
+                <td>@receta.Descripcion</td>
+                <td>@receta.TiempoPreparacion</td>
+                <td>@receta.Calorias</td>
+                <td>@receta.Tipo</td>
+                <td>
+                    <form asp-action="SeleccionarPorciones" asp-controller="RecetasCliente" method="get">
+                        <input type="hidden" name="recetaId" value="@receta.Id" />
+                        <button type="submit" class="btn btn-primary btn-sm">Añadir a compras</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

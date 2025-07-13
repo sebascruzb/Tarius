@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Menú Cliente";
+}
+
+<h2>Bienvenido al Menú del Cliente</h2>
+
+<div style="display: flex; flex-direction: column; gap: 15px; margin-top: 30px;">
+    <form asp-action="MisIngredientes" method="post">
+        <button type="submit" class="btn btn-primary btn-block">Mis Ingredientes</button>
+    </form>
+
+    <form asp-action="ListaCompras" asp-controller="RecetasCliente" method="post">
+        <button type="submit" class="btn btn-secondary  btn-block">Lista de Compras</button>
+    </form>
+
+    <form asp-action="Recetas" method="post">
+        <button type="submit" class="btn btn-success  btn-block">Recetas</button>
+    </form>
+
+    <form asp-action="Planes" method="post">
+        <button type="submit" class="btn btn-warning btn-block">Planes</button>
+    </form>
+</div>

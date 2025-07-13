@@ -1,0 +1,51 @@
+@model Tarius.Models.Usuarios
+
+<div class="login-container">
+    <div class="login-card">
+        <!-- Logo -->
+        <div class="login-logo">
+            <img src="~/resources/images/Logo.jpg" alt="Logo" />
+        </div>
+
+        <!-- Título -->
+        <h2>Iniciar Sesion</h2>
+
+
+        <!-- Verificacion de campos  -->
+        @if (ViewBag.Message != null)
+        {
+            <div class="alert alert-danger">@ViewBag.Message</div>
+        }
+
+        <!-- Formulario de Login -->
+        <form asp-action="Login" asp-controller="Login" method="post" class="login-form">
+        
+            
+            <!-- Campo de Correo -->
+            <div class="input-group">
+                <span class="icon">
+                    <i class="fas fa-user"></i>
+                </span>
+                <input asp-for="Correo" placeholder="Correo Electronico" class="form-input" />
+                <span asp-validation-for="Correo" class="text-danger"></span>
+            </div>
+
+            <!-- Campo de Contraseña -->
+            <div class="input-group">
+                <span class="icon">
+                    <i class="fas fa-lock"></i>
+                </span>
+                <input asp-for="Contraseña" type="password" placeholder="Contraseña" class="form-input" />
+                <span asp-validation-for="Contraseña" class="text-danger"></span>
+            </div>
+
+            <!-- Botón de Login -->
+            <button type="submit" class="btn-login">Iniciar Sesion</button>
+         
+            <!-- Enlace de Recuperación -->
+            <div class="forgot-password">
+                <a href="#">Olvidaste la Conrtaseña?</a>
+            </div>
+        </form>
+    </div>
+</div>

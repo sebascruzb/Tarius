@@ -1,0 +1,34 @@
+﻿@model Tarius.Models.Cliente.IngredienteCliente
+
+@{
+    ViewData["Title"] = "Editar Cantidad";
+}
+
+<h2>Editar Cantidad</h2>
+
+@if (ViewBag.Mensaje != null)
+{
+    <div class="alert alert-danger">@ViewBag.Mensaje</div>
+}
+
+<form asp-action="Editar" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label>Ingrediente</label>
+        <input class="form-control" value="@Model.Nombre" disabled />
+    </div>
+
+    <div class="form-group">
+        <label>Unidad</label>
+        <input class="form-control" value="@Model.Unidad" disabled />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Cantidad"></label>
+        <input name="Cantidad" class="form-control" value="@Model.Cantidad" />
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">Guardar Cambios</button>
+    <a asp-action="Ingredientes" class="btn btn-secondary mt-3">Cancelar</a>
+</form>

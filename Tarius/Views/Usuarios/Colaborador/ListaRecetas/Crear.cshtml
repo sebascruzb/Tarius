@@ -1,0 +1,106 @@
+﻿@model Tarius.Models.Colaborador.Receta
+
+@{
+    ViewData["Title"] = "Crear Receta";
+}
+
+<h2>Crear Nueva Receta</h2>
+
+<form asp-action="Crear" method="post">
+    <div class="mb-3">
+        <label asp-for="Nombre" class="form-label">Nombre</label>
+        <input asp-for="Nombre" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Descripcion" class="form-label">Descripción</label>
+        <textarea asp-for="Descripcion" class="form-control"></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="TiempoPreparacion" class="form-label">Tiempo de Preparación (minutos)</label>
+        <select asp-for="TiempoPreparacion" class="form-control">
+            @for (int i = 5; i <= 180; i += 5)
+            {
+                <option value="@i">@i minutos</option>
+            }
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Tipo" class="form-label">Tipo</label>
+        <select asp-for="Tipo" class="form-control">
+            <option value="Desayuno">Desayuno</option>
+            <option value="Almuerzo">Almuerzo</option>
+            <option value="Merienda">Merienda</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Calorias" class="form-label">Calorías</label>
+        <input asp-for="Calorias" class="form-control" required />
+    </div>
+
+    <hr />
+    <h4>Ingredientes</h4>
+    <div id="ingredientesContainer"></div>
+    <button type="button" class="btn btn-secondary mt-2" onclick="agregarIngrediente()">Agregar Ingrediente</button>
+
+    <hr />
+    <h4>Pasos</h4>
+    <div id="pasosContainer"></div>
+    <button type="button" class="btn btn-secondary mt-2" onclick="agregarPaso()">Agregar Paso</button>
+
+    <br /><br />
+    <button type="submit" class="btn btn-primary mt-3">Guardar Receta</button>
+</form>
+
+@section Scripts {
+    <script>
+        let indexIngrediente = 0;
+        let indexPaso = 0;
+
+        function agregarIngrediente() {
+            const container = document.getElementById('ingredientesContainer');
+            const div = document.createElement('div');
+            div.className = "mb-2";
+            div.innerHTML = `
+                <label>Nombre:</label>
+                <input type="text" name="Ingredientes[${indexIngrediente}].Nombre" class="form-control" required />
+                <label>Cantidad (puede ser fracción como 1/2):</label>
+                <input type="text" name="Ingredientes[${indexIngrediente}].Cantidad" class="form-control" />
+                <label>Unidad:</label>
+                <select name="Ingredientes[${indexIngrediente}].Unidad" class="form-control">
+                    <option value="">-- Seleccionar unidad --</option>
+                    <option value="gramos">gramos</option>
+                    <option value="kilogramos">kilogramos</option>
+                    <option value="mililitros">mililitros</option>
+                    <option value="litros">litros</option>
+                    <option value="taza">taza</option>
+                    <option value="cucharada">cucharada</option>
+                    <option value="cucharadita">cucharadita</option>
+                    <option value="unidad">unidad</option>
+                    <option value="pizca">pizca</option>
+                    <option value="al gusto">al gusto</option>
+                </select>
+                <hr />
+            `;
+            container.appendChild(div);
+            indexIngrediente++;
+        }
+
+        function agregarPaso() {
+            const container = document.getElementById('pasosContainer');
+            const div = document.createElement('div');
+            div.className = "mb-2";
+            div.innerHTML = `
+                <input type="hidden" name="Pasos[${indexPaso}].Orden" value="${indexPaso + 1}" />
+                <label>Paso ${indexPaso + 1}:</label>
+                <textarea name="Pasos[${indexPaso}].Descripcion" class="form-control" required></textarea>
+                <hr />
+            `;
+            container.appendChild(div);
+            indexPaso++;
+        }
+    </script>
+}

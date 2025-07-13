@@ -1,0 +1,46 @@
+﻿@model List<Tarius.Models.Colaborador.Plan>
+
+@{
+    ViewData["Title"] = "Planes de Alimentación";
+    Layout = "~/Views/Shared/_Layout.cshtml"; // o ajusta si usas otro layout
+}
+
+<h2 class="text-center mt-4">Planes de Alimentación</h2>
+
+@if (Model != null && Model.Count > 0)
+{
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped mt-3">
+            <thead class="table-dark">
+                <tr>
+                    <th>Nombre del Plan</th>
+                    <th>Objetivo</th>
+                    <th>Recetas Asociadas</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var plan in Model)
+                {
+                    <tr>
+                        <td>@plan.Nombre</td>
+                        <td>@plan.Objetivo</td>
+                        <td>
+                            <ul>
+                                @foreach (var rp in plan.RecetasPlan)
+                                {
+                                    <li>@rp.Receta.Nombre</li>
+                                }
+                            </ul>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <div class="alert alert-warning mt-4">
+        No se encontraron planes disponibles.
+    </div>
+}

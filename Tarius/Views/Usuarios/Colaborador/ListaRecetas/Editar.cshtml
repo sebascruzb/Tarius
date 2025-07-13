@@ -1,0 +1,147 @@
+﻿@model Tarius.Models.Colaborador.Receta
+
+@{
+    ViewData["Title"] = "Editar Receta";
+}
+
+<h2>Editar Receta</h2>
+
+<form asp-action="Editar" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="mb-3">
+        <label asp-for="Nombre" class="form-label">Nombre</label>
+        <input asp-for="Nombre" class="form-control" />
+        <span asp-validation-for="Nombre" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Descripcion" class="form-label">Descripción</label>
+        <textarea asp-for="Descripcion" class="form-control"></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="TiempoPreparacion" class="form-label">Tiempo de Preparación (minutos)</label>
+        <select asp-for="TiempoPreparacion" class="form-control">
+            @for (int i = 5; i <= 180; i += 5)
+            {
+                <option value="@i" selected="@(Model.TiempoPreparacion == i)">
+                    @i minutos
+                </option>
+            }
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Tipo" class="form-label">Tipo</label>
+        <select asp-for="Tipo" class="form-control">
+            <option value="Desayuno" selected="@(Model.Tipo == "Desayuno")">Desayuno</option>
+            <option value="Almuerzo" selected="@(Model.Tipo == "Almuerzo")">Almuerzo</option>
+            <option value="Merienda" selected="@(Model.Tipo == "Merienda")">Merienda</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Calorias" class="form-label">Calorías</label>
+        <input asp-for="Calorias" class="form-control" />
+        <span asp-validation-for="Calorias" class="text-danger"></span>
+    </div>
+
+    <hr />
+    <h4>Ingredientes</h4>
+    <div id="ingredientesContainer">
+        @for (int i = 0; i < Model.Ingredientes.Count; i++)
+        {
+            <div class="mb-2">
+                <label>Nombre:</label>
+                <input name="Ingredientes[@i].Nombre" value="@Model.Ingredientes[i].Nombre" class="form-control mb-1" placeholder="Nombre" required />
+                <label>Cantidad (puede ser fracción como 1/2):</label>
+                <input name="Ingredientes[@i].Cantidad" value="@Model.Ingredientes[i].Cantidad" class="form-control mb-1" placeholder="Cantidad" />
+                <label>Unidad:</label>
+                <select name="Ingredientes[@i].Unidad" class="form-control mb-1">
+                    <option value="" selected="@(string.IsNullOrEmpty(Model.Ingredientes[i].Unidad))">-- Seleccionar unidad --</option>
+                    <option value="gramos" selected="@(Model.Ingredientes[i].Unidad == "gramos")">gramos</option>
+                    <option value="kilogramos" selected="@(Model.Ingredientes[i].Unidad == "kilogramos")">kilogramos</option>
+                    <option value="mililitros" selected="@(Model.Ingredientes[i].Unidad == "mililitros")">mililitros</option>
+                    <option value="litros" selected="@(Model.Ingredientes[i].Unidad == "litros")">litros</option>
+                    <option value="taza" selected="@(Model.Ingredientes[i].Unidad == "taza")">taza</option>
+                    <option value="cucharada" selected="@(Model.Ingredientes[i].Unidad == "cucharada")">cucharada</option>
+                    <option value="cucharadita" selected="@(Model.Ingredientes[i].Unidad == "cucharadita")">cucharadita</option>
+                    <option value="unidad" selected="@(Model.Ingredientes[i].Unidad == "unidad")">unidad</option>
+                    <option value="pizca" selected="@(Model.Ingredientes[i].Unidad == "pizca")">pizca</option>
+                    <option value="al gusto" selected="@(Model.Ingredientes[i].Unidad == "al gusto")">al gusto</option>
+                </select>
+
+                <button type="button" class="btn btn-danger btn-sm mt-1" onclick="this.parentElement.remove()">X</button>
+                <hr />
+            </div>
+        }
+    </div>
+    <button type="button" class="btn btn-secondary mt-2" onclick="agregarIngrediente()">Agregar Ingrediente</button>
+
+    <hr />
+    <h4>Pasos</h4>
+    <div id="pasosContainer">
+        @for (int i = 0; i < Model.Pasos.Count; i++)
+        {
+            <div class="mb-2">
+                <input name="Pasos[@i].Orden" type="hidden" value="@(i + 1)" />
+                <label>Paso @(i + 1):</label>
+                <textarea name="Pasos[@i].Descripcion" class="form-control" placeholder="Descripción del paso">@Model.Pasos[i].Descripcion</textarea>
+                <button type="button" class="btn btn-danger btn-sm mt-1" onclick="this.parentElement.remove()">X</button>
+                <hr />
+            </div>
+        }
+    </div>
+    <button type="button" class="btn btn-secondary mt-2" onclick="agregarPaso()">Agregar Paso</button>
+
+    <br /><br />
+    <button type="submit" class="btn btn-primary mt-3">Guardar Cambios</button>
+</form>
+
+@section Scripts {
+    <script>
+        function agregarIngrediente() {
+            const container = document.getElementById("ingredientesContainer");
+            const count = container.children.length;
+            const div = document.createElement("div");
+            div.className = "mb-2";
+            div.innerHTML = `
+                <label>Nombre:</label>
+                <input name="Ingredientes[${count}].Nombre" class="form-control mb-1" placeholder="Nombre" required />
+                <label>Cantidad (puede ser fracción como 1/2):</label>
+                <input name="Ingredientes[${count}].Cantidad" class="form-control mb-1" placeholder="Cantidad" />
+                <label>Unidad:</label>
+                <select name="Ingredientes[${count}].Unidad" class="form-control mb-1">
+                    <option value="">-- Seleccionar unidad --</option>
+                    <option value="gramos">gramos</option>
+                    <option value="kilogramos">kilogramos</option>
+                    <option value="mililitros">mililitros</option>
+                    <option value="litros">litros</option>
+                    <option value="taza">taza</option>
+                    <option value="cucharada">cucharada</option>
+                    <option value="cucharadita">cucharadita</option>
+                    <option value="unidad">unidad</option>
+                    <option value="pizca">pizca</option>
+                    <option value="al gusto">al gusto</option>
+                </select>
+                <button type="button" class="btn btn-danger btn-sm mt-1" onclick="this.parentElement.remove()">X</button>
+                <hr />`;
+            container.appendChild(div);
+        }
+
+        function agregarPaso() {
+            const container = document.getElementById("pasosContainer");
+            const count = container.children.length;
+            const div = document.createElement("div");
+            div.className = "mb-2";
+            div.innerHTML = `
+                <input type="hidden" name="Pasos[${count}].Orden" value="${count + 1}" />
+                <label>Paso ${count + 1}:</label>
+                <textarea name="Pasos[${count}].Descripcion" class="form-control" placeholder="Descripción del paso"></textarea>
+                <button type="button" class="btn btn-danger btn-sm mt-1" onclick="this.parentElement.remove()">X</button>
+                <hr />`;
+            container.appendChild(div);
+        }
+    </script>
+}

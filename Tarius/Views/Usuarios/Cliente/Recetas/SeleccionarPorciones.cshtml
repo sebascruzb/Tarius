@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "Seleccionar Porciones";
+}
+
+<h2>Añadir a compras: @ViewBag.NombreReceta</h2>
+
+<form asp-action="ProcesarPorciones" asp-controller="RecetasCliente" method="post">
+    <input type="hidden" name="recetaId" value="@ViewBag.RecetaId" />
+
+    <div class="form-group">
+        <label for="porciones">¿Para cuántas porciones?</label>
+        <input type="number" name="porciones" class="form-control" min="1" required />
+    </div>
+
+    <button type="submit" class="btn btn-success mt-2">Confirmar</button>
+    <a asp-action="VerRecetas" class="btn btn-secondary mt-2">Cancelar</a>
+</form>

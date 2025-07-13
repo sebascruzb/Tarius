@@ -1,0 +1,99 @@
+.dashboard-container {
+    padding: 20px;
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #006666;
+    }
+
+    .actions {
+        margin-bottom: 15px;
+
+        .search-box {
+            display: flex;
+            align-items: center;
+
+            .search-input {
+                padding: 8px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                margin-right: 5px;
+            }
+
+            .search-btn {
+                background-color: #006666;
+                color: white;
+                padding: 8px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+            .search-btn:hover {
+                background-color: #005555;
+            }
+        }
+
+        .btn-primary {
+            background-color: #006666;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            margin-left: auto;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #005555;
+        }
+    }
+
+    .table {
+        width: 100%;
+        margin-top: 10px;
+
+        th, td {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .table-dark {
+            background-color: #343a40;
+            color: white;
+        }
+    }
+
+    .action-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+
+        .btn {
+            display: inline-block;
+            padding: 6px 10px;
+            border-radius: 5px;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+        }
+
+        .btn-info {
+            background-color: #17a2b8;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+    }
+}

@@ -1,0 +1,21 @@
+﻿@model Tarius.Models.Colaborador.Receta
+
+@{
+    ViewData["Title"] = "Eliminar Receta";
+}
+
+<h2>¿Estás seguro de que deseas eliminar esta receta?</h2>
+
+<div>
+    <h4>@Model.Nombre</h4>
+    <p><strong>Descripción:</strong> @Model.Descripcion</p>
+    <p><strong>Tiempo de preparación:</strong> @Model.TiempoPreparacion minutos</p>
+    <p><strong>Tipo:</strong> @Model.Tipo</p>
+    <p><strong>Calorías:</strong> @Model.Calorias</p>
+</div>
+
+<form asp-action="Eliminar" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a asp-controller="DashboardColaborador" asp-action="ListaRecetas" class="btn btn-secondary">Cancelar</a>
+</form>

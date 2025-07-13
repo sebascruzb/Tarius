@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Tarius.Models.Cliente.IngredienteCliente>
+@{
+    ViewData["Title"] = "Mis Ingredientes";
+}
+
+<h4>Bienvenido, @ViewBag.Correo</h4>
+<h2 class="mb-3">Mis Ingredientes</h2>
+
+<a asp-action="Crear" class="btn btn-success mb-3">Agregar Ingrediente</a>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Cantidad</th>
+            <th>Unidad</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var ingrediente in Model)
+        {
+            <tr>
+                <td>@ingrediente.Nombre</td>
+                <td>@ingrediente.Cantidad</td>
+                <td>@ingrediente.Unidad</td>
+                <td>
+                    <a asp-action="Editar" asp-route-id="@ingrediente.Id" class="btn btn-warning btn-sm">Agregar</a>
+                    <a asp-action="Eliminar" asp-route-id="@ingrediente.Id" class="btn btn-danger btn-sm">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
