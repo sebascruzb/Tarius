@@ -1,4 +1,6 @@
-﻿namespace Tarius.Models.Colaborador
+﻿using System.Text.Json.Serialization;
+
+namespace Tarius.Models.Colaborador
 {
     public class Ingrediente
     {
@@ -7,8 +9,10 @@
         public string? Cantidad { get; set; }
         public string? Unidad { get; set; }
 
-        public int RecetaId { get; set; } = new();
-        public Receta Receta { get; set; } = new();
+        public int RecetaId { get; set; }
+
+        [JsonIgnore]
+        public Receta? Receta { get; set; }
     }
 
 }

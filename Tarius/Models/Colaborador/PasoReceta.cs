@@ -1,4 +1,8 @@
-﻿namespace Tarius.Models.Colaborador
+﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.Text.Json.Serialization;
+
+namespace Tarius.Models.Colaborador
 {
     public class PasoReceta
     {
@@ -7,7 +11,9 @@
         public string? Descripcion { get; set; }
 
         public int RecetaId { get; set; }
-        public Receta Receta { get; set; } = new();
+
+        [JsonIgnore]
+        public Receta? Receta { get; set; }
     }
 
 }
