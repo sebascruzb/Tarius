@@ -5,9 +5,12 @@ using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
+
 // Configuración de la base de datos
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 
 // Configuración de la autenticación basada en cookies
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -17,46 +20,23 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.LogoutPath = "/Login/Logout";
         options.AccessDeniedPath = "/Login/AccessDenied";
         options.Cookie.Name = "TariusAuthCookie";
-        options.ExpireTimeSpan = TimeSpan.FromMinutes(30); 
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(30);  // Tiempo de expiración
     });
 
-// Aquí agregamos soporte para controladores de tipo API
-builder.Services.AddControllers()
-    .AddJsonOptions(options =>
-    {
-        options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
-    });
-
-
-// También seguimos soportando vistas
-builder.Services.AddControllersWithViews()
-    .AddJsonOptions(options =>
-    {
-        options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
-        options.JsonSerializerOptions.WriteIndented = true; // Opcional, para que el JSON sea legible
-    });
+builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-// Muestra detalles de errores solo en desarrollo
-if (app.Environment.IsDevelopment())
-{
-    app.UseDeveloperExceptionPage();
-}
-
-app.UseStaticFiles();
-
 app.UseRouting();
-
-app.UseAuthentication();
+app.UseAuthentication(); // Asegúrate de habilitar la autenticación antes de la autorización
 app.UseAuthorization();
+app.UseStaticFiles();
+app.UseDeveloperExceptionPage();
 
-// Mapear rutas para controladores MVC
+
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-
-// Mapear rutas para controladores de API (como ApiRecetasController)
-app.MapControllers(); // <-- esto habilita la API
 
 app.Run();
